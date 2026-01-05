@@ -1,38 +1,48 @@
 # stewr/planner.py
-def generate_plan(text: str) -> dict:
+def generate_plan(command_text):
     """
-    Dummy planner: returns a static JSON plan based on keywords in the text.
+    Returns a structured JSON plan for setting up Flask backend + React frontend.
+    Steps are ordered for proper scaffolding.
     """
-    text = text.lower()
-    steps = []
+    return {
+        "steps": [
+            {
+                "title": "Create backend folder",
+                "explanation": "Create a folder for Python backend code",
+                "command": "mkdir backend"
+            },
+            {
+                "title": "Create virtual environment",
+                "explanation": "Isolate Python dependencies inside backend/venv",
+                "command": "python -m venv backend/venv"
+            },
+            {
+                "title": "Install Flask",
+                "explanation": "Backend framework",
+                "command": "python -m pip install --upgrade pip && python -m pip install flask"
+            },
+            {
+                "title": "Create Flask scaffold",
+                "explanation": "Create app.py inside backend folder",
+                "file_name": "backend/app.py",
+                "file_content": """from flask import Flask
 
-    # Check for Python/Flask
-    if "flask" in text:
-        steps.append({
-            "title": "Create virtual environment",
-            "explanation": "Isolate Python dependencies",
-            "command": "python -m venv venv"
-        })
-        steps.append({
-            "title": "Install Flask",
-            "explanation": "Backend framework",
-            "command": "venv\\Scripts\\pip install flask"  # Windows path
-        })
+                app = Flask(__name__)
 
-    # Check for React
-    if "react" in text:
-        steps.append({
+                @app.route('/')
+                def home():
+                    return 'Hello from Stewr!'
+                """
+            },
+            {
             "title": "Create React app",
-            "explanation": "Frontend scaffold",
-            "command": "npx create-react-app frontend"
-        })
-
-    # Check for Express
-    if "express" in text:
-        steps.append({
-            "title": "Setup Express backend",
-            "explanation": "Node.js backend scaffold",
-            "command": "npm init -y && npm install express"
-        })
-
-    return {"steps": steps}
+            "explanation": "Frontend scaffold using Vite (non-interactive)",
+            "command": "npx degit vitejs/vite/packages/create-vite/template-react frontend"
+        },
+        {
+            "title": "Install frontend dependencies",
+            "explanation": "Install React dependencies",
+            "command": "cd frontend && npm install"
+        }
+        ]
+    }
