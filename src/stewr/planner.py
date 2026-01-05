@@ -1,59 +1,38 @@
-from typing import List, Dict
-
-SUPPORTED_STACKS = {
-    "flask": ["flask", "python flask"],
-    "react": ["react", "reactjs", "react js"],
-    "express": ["express", "expressjs", "node express"],
-}
-
-def detect_stacks(user_input: str) -> List[str]:
-    user_input = user_input.lower()
-    detected = []
-
-    for stack, keywords in SUPPORTED_STACKS.items():
-        for kw in keywords:
-            if kw in user_input:
-                detected.append(stack)
-                break
-
-    return detected
-
-
-def generate_plan(user_input: str) -> Dict:
-    stacks = detect_stacks(user_input)
-
+# stewr/planner.py
+def generate_plan(text: str) -> dict:
+    """
+    Dummy planner: returns a static JSON plan based on keywords in the text.
+    """
+    text = text.lower()
     steps = []
 
-    if "flask" in stacks:
-        steps.extend([
-            {
-                "title": "Create Python virtual environment",
-                "explanation": "Create isolated Python environment",
-                "command": "python -m venv venv"
-            },
-            {
-                "title": "Install Flask",
-                "explanation": "Install Flask web framework",
-                "command": "venv\\Scripts\\pip install flask"
-            }
-        ])
+    # Check for Python/Flask
+    if "flask" in text:
+        steps.append({
+            "title": "Create virtual environment",
+            "explanation": "Isolate Python dependencies",
+            "command": "python -m venv venv"
+        })
+        steps.append({
+            "title": "Install Flask",
+            "explanation": "Backend framework",
+            "command": "venv\\Scripts\\pip install flask"  # Windows path
+        })
 
-    if "react" in stacks:
+    # Check for React
+    if "react" in text:
         steps.append({
             "title": "Create React app",
-            "explanation": "Scaffold React frontend",
+            "explanation": "Frontend scaffold",
             "command": "npx create-react-app frontend"
         })
 
-    if "express" in stacks:
+    # Check for Express
+    if "express" in text:
         steps.append({
-            "title": "Setup Express app",
-            "explanation": "Initialize Express backend",
-            "command": "npx express-generator backend"
+            "title": "Setup Express backend",
+            "explanation": "Node.js backend scaffold",
+            "command": "npm init -y && npm install express"
         })
 
-    return {
-        "input": user_input,
-        "stacks": stacks,
-        "steps": steps
-    }
+    return {"steps": steps}
