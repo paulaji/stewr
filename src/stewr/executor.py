@@ -34,7 +34,7 @@ def run_plan(plan):
             content = step["file_content"].strip()  # remove leading indentation
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(content)
-            print("[green]Step completed![/green]")
+            print("[green]Stewing completed![/green]")
             continue
 
         # Otherwise, run shell command
@@ -45,6 +45,6 @@ def run_plan(plan):
 
         try:
             subprocess.run(cmd, shell=True, check=True)
-            print("[green]Step completed![/green]")
+            print("[green]Stewing completed![/green]")
         except subprocess.CalledProcessError:
             print("[red]Command failed![/red]")
