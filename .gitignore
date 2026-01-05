@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyi
+*.env
+*.venv
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+*.whl
+*.tar.gz
+*.zip
+
+# PyInstaller
+*.manifest
+*.spec
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Stewr model (optional, if you want to exclude the local model)
+stewr/model/stewr_tiny.ggml

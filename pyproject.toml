@@ -1,1 +1,19 @@
-ECHO is on.
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stewr"
+version = "0.1.0"
+dependencies = [
+  "rich>=13.0.0",
+]
+
+[project.scripts]
+stewr = "stewr.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
